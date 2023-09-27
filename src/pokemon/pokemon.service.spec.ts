@@ -14,13 +14,11 @@ describe('PokemonService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        PokemonService,
-        {
-          provide: HttpService,
-          useValue: createMock<HttpService>(),
-        },
+        PokemonService
       ],
-    }).compile();
+    })
+    .useMocker(createMock)
+    .compile();
 
     pokemonService = module.get<PokemonService>(PokemonService);
     httpService = module.get(HttpService);
